@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import AddBook from "./components/AddBook";
+import Books from "./components/Books";
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    books: [],
+  };
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:8080/books")
+      .then((res) => this.setState({ books: res.data }));
+  }
+
+  // Adds new book
+  addNewBook = (book) => {
+    axios
+      .post("http://localhost:8080/books", {
+        name: book.name,
+        author: book.author,
+        price: book.price,
+        sold: false,
+      })
+      .then((res) => this.setState({ books: [...this.state.books, res.data] }));
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Book Store</h1>
+        <AddBook addNewBook={this.addNewBook} />
+        <br />
+        <Books books={this.state.books} />
+      </div>
+    );
+  }
 }
 
 export default App;
