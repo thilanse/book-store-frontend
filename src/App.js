@@ -27,13 +27,28 @@ class App extends Component {
       .then((res) => this.setState({ books: [...this.state.books, res.data] }));
   };
 
+  // Deletes a book
+  deleteBook = (id) => {
+    axios
+      .delete(`http://localhost:8080/books/${id}`)
+      .then((res) => {
+        this.setState({
+          books: [...this.state.books.filter((book) => book.id !== id)],
+        });
+
+        // Todo: Implement a proper method to notify the user of the deletion
+        console.log(res.data.name + " was deleted.");
+      }
+      );
+  };
+
   render() {
     return (
       <div className="App">
         <h1>Book Store</h1>
         <AddBook addNewBook={this.addNewBook} />
         <br />
-        <Books books={this.state.books} />
+        <Books books={this.state.books} deleteBook={this.deleteBook} />
       </div>
     );
   }
