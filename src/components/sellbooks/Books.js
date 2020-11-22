@@ -14,6 +14,7 @@ class Books extends Component {
   }
 }
 
+
 // PropTypes
 Books.propType = {
   books: PropTypes.array.isRequired,
