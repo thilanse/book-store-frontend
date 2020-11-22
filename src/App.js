@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./components/layout/Header";
 import Search from "./components/search/Search";
 import SellBook from "./components/sellbooks/SellBook";
+import Login from "./components/Login";
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
                     <Header/>
                     <Route exact path="/" component={Search}/>
                     <Route path="/sell" component={SellBook}/>
+                    <Route path="/login" component={Login}/>
                 </div>
             </Router>
         );
