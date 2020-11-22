@@ -52,7 +52,14 @@ export class SellBook extends Component {
 
     // Deletes a book
     deleteBook = (id) => {
-        axios.delete(`http://localhost:8080/books/${id}`).then((res) => {
+
+        const config = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }
+
+        axios.delete(`/books/${id}`, config).then((res) => {
             this.setState({
                 books: [...this.state.books.filter((book) => book.id !== id)],
             });
@@ -66,6 +73,7 @@ export class SellBook extends Component {
         return (
             <div>
                 <div style={addNewBookStyle}>
+                    <h4>To sell a book, add the book details here:</h4>
                     <AddBook addNewBook={this.addNewBook}/>
                 </div>
 
@@ -78,13 +86,15 @@ export class SellBook extends Component {
 }
 
 const addNewBookStyle = {
-    float: 'left',
-    height: '600px'
+    padding: '20px',
+    marginBottom: '20px'
 }
 
 const booksContainerStyle = {
-    float: 'left',
-    width: '1100px'
+    width: '950px',
+    minHeight: '1000px',
+    margin: 'auto',
+    padding: 'auto'
 }
 
 

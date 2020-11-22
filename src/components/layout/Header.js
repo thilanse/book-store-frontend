@@ -33,7 +33,7 @@ class Header extends Component {
         }
 
         return (
-            <header>
+            <header style={{marginBottom: '20px'}}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <Link className="navbar-brand" to="/">Book Store</Link>
                     <div className="collapse navbar-collapse row" id="navbarTogglerDemo02">

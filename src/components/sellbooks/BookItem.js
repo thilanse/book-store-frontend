@@ -5,16 +5,25 @@ class BookItem extends Component {
     render() {
         const {id, name, author, price} = this.props.book;
         return (
-            <div style={bookItemStyle}>
-                <p>{name}</p>
-                <p style={{fontSize: "14px", marginTop: "5px"}}>{author}</p>
-                <p style={{marginTop: "10px"}}>Rs. {price}</p>
-                <button
-                    style={deleteButtonStyle}
-                    onClick={this.props.deleteBook.bind(this, id)}
-                >
-                    Delete
-                </button>
+            // <div style={bookItemStyle}>
+            //     <p>{name}</p>
+            //     <p style={{fontSize: "14px", marginTop: "5px"}}>{author}</p>
+            //     <p style={{marginTop: "10px"}}>Rs. {price}</p>
+            //     <button
+            //         style={deleteButtonStyle}
+            //         onClick={this.props.deleteBook.bind(this, id)}
+            //     >
+            //         Delete
+            //     </button>
+            // </div>
+
+            <div className="card text-center" style={bookItemStyle}>
+                <div className="card-body">
+                    <p className="card-title" style={{fontSize: '15px'}}>{name}</p>
+                    <p className="card-text">{author}</p>
+                    <p className="card-text">{price}</p>
+                    <button className="btn btn-danger" onClick={this.props.deleteBook.bind(this, id)}>Delete</button>
+                </div>
             </div>
         );
     }
@@ -29,13 +38,10 @@ const deleteButtonStyle = {
 };
 
 const bookItemStyle = {
+    width: '14rem',
     float: "left",
-    border: "1px black solid",
-    padding: "5px",
-    width: "200px",
-    height: "200px",
-    textAlign: "center",
-    margin: "10px",
+    height: "250px",
+    margin: '5px'
 };
 
 BookItem.propTypes = {
