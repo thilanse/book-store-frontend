@@ -11,28 +11,43 @@ export class SellBook extends Component {
 
     componentDidMount() {
 
-        const config = {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token")
-            }
-        }
+        const token = localStorage.getItem("token");
 
-        axios
-            .get("/books", config)
-            .then((res) => this.setState({books: res.data}))
-            .catch(err => console.log(err));
+        if (token !== null) {
+
+            const config = {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            }
+
+            axios
+                .get("/books", config)
+                .then((res) => this.setState({books: res.data}))
+                .catch(err => console.log(err));
+        }
     }
 
     // Adds new book
     addNewBook = (book) => {
-        axios
-            .post("http://localhost:8080/books", {
-                name: book.name,
-                author: book.author,
-                price: book.price,
-                sold: false,
-            })
-            .then((res) => this.setState({books: [...this.state.books, res.data]}));
+        const token = localStorage.getItem("token");
+
+        if (token !== null) {
+            const config = {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            }
+
+            axios
+                .post("/books", {
+                    name: book.name,
+                    author: book.author,
+                    price: book.price,
+                    sold: false,
+                }, config)
+                .then((res) => this.setState({books: [...this.state.books, res.data]}));
+        }
     };
 
     // Deletes a book
@@ -50,12 +65,27 @@ export class SellBook extends Component {
     render() {
         return (
             <div>
-                <AddBook addNewBook={this.addNewBook}/>
-                <br/>
-                <Books books={this.state.books} deleteBook={this.deleteBook}/>
+                <div style={addNewBookStyle}>
+                    <AddBook addNewBook={this.addNewBook}/>
+                </div>
+
+                <div style={booksContainerStyle}>
+                    <Books books={this.state.books} deleteBook={this.deleteBook}/>
+                </div>
             </div>
         );
     }
 }
+
+const addNewBookStyle = {
+    float: 'left',
+    height: '600px'
+}
+
+const booksContainerStyle = {
+    float: 'left',
+    width: '1100px'
+}
+
 
 export default SellBook;

@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-
 import axios from "axios";
 
-class Login extends Component {
+class Signup extends Component {
 
     state = {
         username: '',
+        email: '',
         password: ''
     }
 
@@ -18,22 +18,22 @@ class Login extends Component {
     onSubmit = event => {
         event.preventDefault();
 
-        if (this.state.username === '' || this.state.password === '') {
+        if (this.state.username === '' || this.state.password === '' || this.state.email === '') {
             return
         }
 
-        axios.post("/authenticate", this.state)
+        console.log(this.state);
+
+        axios.post("/signup", this.state)
             .then(res => {
-                localStorage.setItem("token", res.data.jwt);
+                console.log(res.data)
                 this.setState({
                     username: '',
+                    email: '',
                     password: ''
-                });
-                console.log(res.data);
+                })
             })
             .catch(err => console.log(err));
-
-
     }
 
     render() {
@@ -51,6 +51,16 @@ class Login extends Component {
                             onChange={this.onChange}/>
                     </div>
                     <div className="form-group">
+                        <label htmlFor="emailInput">Email</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="emailInput"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onChange}/>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="passwordInput">Password</label>
                         <input
                             type="password"
@@ -60,7 +70,7 @@ class Login extends Component {
                             value={this.state.password}
                             onChange={this.onChange}/>
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary">Signup</button>
                 </form>
             </div>
         )
@@ -73,4 +83,4 @@ const loginFormStyle = {
     margin: '30px auto'
 }
 
-export default Login;
+export default Signup;

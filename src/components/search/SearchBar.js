@@ -24,9 +24,18 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <input type="text" name="searchQuery" value={this.state.searchQuery} onChange={this.onChange}/>
-                <input type="submit" value="Search" />
+            <form className="form-inline px-auto row" onSubmit={this.onSubmit}>
+                <input
+                    className="form-control mr-sm-2 col-10"
+                    type="search"
+                    placeholder="Search"
+                    name="searchQuery"
+                    value={this.state.searchQuery}
+                    onChange={this.onChange}/>
+                <input
+                    className="btn btn-outline-success col-auto"
+                    type="submit"
+                    value="Search" />
             </form>
         )
     }
