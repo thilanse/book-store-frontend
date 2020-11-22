@@ -30,7 +30,8 @@ class Login extends Component {
                     username: '',
                     password: ''
                 });
-                console.log(res.data);
+                // console.log(res.data.userDetails);
+                this.props.setCurrentUser(res.data.userDetails);
             })
             .catch(err => console.log(err));
 

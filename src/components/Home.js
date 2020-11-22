@@ -28,7 +28,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Header performSearch={this.performSearch}/>
+                <Header username={this.props.username} performSearch={this.performSearch}/>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-2">
