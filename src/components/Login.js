@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import axios from "axios";
 
@@ -40,6 +41,7 @@ class Login extends Component {
         return (
             <div style={loginFormStyle}>
                 <form onSubmit={this.onSubmit}>
+                    <h2>Login</h2>
                     <div className="form-group">
                         <label htmlFor="usernameInput">Username</label>
                         <input
@@ -61,6 +63,8 @@ class Login extends Component {
                             onChange={this.onChange}/>
                     </div>
                     <button type="submit" className="btn btn-primary">Login</button>
+                    <Link className="btn btn-secondary ml-2" to="/signup">Signup</Link>
+                    <Link className="btn btn-secondary ml-2" to="/">Back to Home Page</Link>
                 </form>
             </div>
         )
