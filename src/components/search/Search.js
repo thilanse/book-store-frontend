@@ -10,8 +10,9 @@ class Search extends Component {
     }
 
     performSearch = (query) => {
+        console.log(query);
         axios
-            .get(`http://localhost:8080/search?query=${query}`)
+            .get(`/search?query=${query}`)
             .then(res => this.setState({searchResults: res.data}))
     }
 

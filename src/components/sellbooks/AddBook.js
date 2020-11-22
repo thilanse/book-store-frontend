@@ -36,39 +36,37 @@ class AddBook extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit} style={formStyle}>
-                <div style={formInputStyle}>
-                    <label>Book Title</label>
-                    <input
-                        type="input"
-                        name="name"
-                        value={this.state.name}
-                        onChange={this.onChange}
-                    />
-                </div>
-
-                <div style={formInputStyle}>
-                    <label>Book Author</label>
-                    <input
-                        type="input"
-                        name="author"
-                        value={this.state.author}
-                        onChange={this.onChange}
-                    />
-                </div>
-
-                <div style={formInputStyle}>
-                    <label>Book Price</label>
-                    <input
-                        type="input"
-                        name="price"
-                        value={this.state.price}
-                        onChange={this.onChange}
-                    />
-                </div>
-
-                <div style={formInputStyle}>
-                    <input type="submit" value="Add Book"/>
+            <form onSubmit={this.onSubmit}>
+                <div className="form-row">
+                    <div className="col-4">
+                        <input type="text"
+                               className="form-control"
+                               placeholder="Book name"
+                               name="name"
+                               value={this.state.name}
+                               onChange={this.onChange}/>
+                    </div>
+                    <div className="col-4">
+                        <input type="text"
+                               className="form-control"
+                               placeholder="Author"
+                               name="author"
+                               value={this.state.author}
+                               onChange={this.onChange}/>
+                    </div>
+                    <div className="col-3">
+                        <input type="text"
+                               className="form-control"
+                               placeholder="Price"
+                               name="price"
+                               value={this.state.price}
+                               onChange={this.onChange}/>
+                    </div>
+                    <div className="col-1">
+                        <input type="submit"
+                               className="btn btn-info"
+                               value="Add Book"/>
+                    </div>
                 </div>
             </form>
         );

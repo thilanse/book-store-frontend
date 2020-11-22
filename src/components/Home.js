@@ -1,8 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from "./layout/Header";
 import Navigation from "./layout/Navigation";
 import MainContent from "./layout/MainContent";
 import axios from "axios";
+import SellBook from "./sellbooks/SellBook";
 
 class Home extends Component {
 
@@ -11,30 +13,41 @@ class Home extends Component {
     }
 
     performSearch = (query) => {
-        const token = localStorage.getItem("token")
 
-        if(token !== null)
-        {
-            const config = {
-                headers: {
-                    Authorization: "Bearer " + token
-                }
+        const config = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
             }
-            axios
-                .get(`/search?query=${query}`, config)
-                .then(res => this.setState({searchResults: res.data}))
         }
+
+        axios
+            .get(`/search?query=${query}`, config)
+            .then(res => this.setState({searchResults: res.data}))
     }
 
     render() {
         return (
             <div>
                 <Header performSearch={this.performSearch}/>
-                <div>
-                    <Navigation />
-                </div>
-                <div>
-                    <MainContent results={this.state.searchResults}/>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-2">
+                            <Navigation/>
+                        </div>
+                        <div className="col-10" style={{paddingLeft: '50px'}}>
+                            <Router>
+                                <div className="App">
+                                    <Route exact path="/" render={() => (
+                                        <MainContent results={this.state.searchResults}/>
+                                    )}/>
+                                    <Route exact path="/home/" render={() => (
+                                        <MainContent results={this.state.searchResults}/>
+                                    )}/>
+                                    <Route exact path="/home/sell" component={SellBook}/>
+                                </div>
+                            </Router>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

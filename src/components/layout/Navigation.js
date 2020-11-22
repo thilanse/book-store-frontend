@@ -3,17 +3,17 @@ import {Link} from 'react-router-dom';
 
 function Navigation() {
     return (
-        <div style={navStyle}>
-            <Link style={linkStyle} to="/">Home</Link>
-            <Link style={linkStyle} to="/sell">Sell a book</Link>
-            <Link style={linkStyle} to="/">Purchased Books</Link>
-            <Link style={linkStyle} to="/">Trending</Link>
+        <div className="list-group" style={linkStyle}>
+            <Link className="list-group-item list-group-item-action" to="/">Home</Link>
+            <Link className="list-group-item list-group-item-action" to="/home/sell">Sell a book</Link>
+            <Link className="list-group-item list-group-item-action" to="/">Purchased Books</Link>
+            <Link className="list-group-item list-group-item-action" to="/">Trending</Link>
         </div>
     )
 }
 
 const linkStyle = {
-    marginRight: "10px"
+    width: "15rem"
 }
 
 const navStyle = {}
