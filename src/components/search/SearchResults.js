@@ -1,13 +1,32 @@
-import React, {Component} from 'react'
+import React, {useEffect} from 'react'
 import SearchItem from "./SearchItem";
 
-class SearchResults extends Component {
+export default function SearchResults({results}) {
 
-    render() {
-        return this.props.results.map(result => (
-            <SearchItem key={result.id} result={result}/>
-        ));
-    }
+    useEffect(() => {
+        console.log(results)
+    }, [results]);
+
+    return (
+        <div>
+            {results.map(result => (
+                <SearchItem key={result.id} result={result}/>
+            ))}
+        </div>
+    )
+
+    // return this.props.results.map(result => (
+    //     <SearchItem key={result.id} result={result}/>
+    // ));
 }
 
-export default SearchResults;
+// class SearchResults extends Component {
+//
+//     render() {
+//         return this.props.results.map(result => (
+//             <SearchItem key={result.id} result={result}/>
+//         ));
+//     }
+// }
+//
+// export default SearchResults;

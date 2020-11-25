@@ -59,14 +59,16 @@ export class SellBook extends Component {
             }
         }
 
-        axios.delete(`/books/${id}`, config).then((res) => {
-            this.setState({
-                books: [...this.state.books.filter((book) => book.id !== id)],
-            });
+        axios.delete(`/books/${id}`, config)
+            .then((res) => {
+                this.setState({
+                    books: [...this.state.books.filter((book) => book.id !== id)],
+                });
 
-            // Todo: Implement a proper method to notify the user of the deletion
-            console.log(res.data.name + " was deleted.");
-        });
+                // Todo: Implement a proper method to notify the user of the deletion
+                console.log(res.data.name + " was deleted.");
+            })
+            .catch(err => console.log(err));
     };
 
     render() {

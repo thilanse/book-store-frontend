@@ -7,37 +7,19 @@ import Signup from "./components/Signup";
 
 class App extends Component {
 
-    state = {
-        currentUser: {
-            username: '',
-            email: ''
-        }
-    };
-
-    setCurrentUser = (data) => {
-        // console.log(data);
-        const userDetails = {
-            username: data.username,
-            email: data.email
-        }
-
-        this.setState({currentUser: userDetails})
-        console.log(this.state);
-    }
-
     render() {
 
         return (
             <Router>
                 <div className="App">
                     <Route exact path="/" render={() => (
-                        <Home username={this.state.currentUser.username}/>
+                        <Home />
                     )}/>
                     <Route path="/home" render={() => (
-                        <Home username={this.state.currentUser.username}/>
+                        <Home />
                     )}/>
                     <Route path="/login" render={() => (
-                        <Login setCurrentUser={this.setCurrentUser}/>
+                        <Login />
                     )}/>
                     <Route path="/signup" component={Signup}/>
                 </div>

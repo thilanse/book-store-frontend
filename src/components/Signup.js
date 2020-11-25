@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import axios from "axios";
 
@@ -9,6 +9,12 @@ class Signup extends Component {
         username: '',
         email: '',
         password: ''
+    }
+
+    componentWillUnmount() {
+        this.setState = (state,callback)=>{
+            return
+        };
     }
 
     onChange = event => {
@@ -36,6 +42,8 @@ class Signup extends Component {
                 })
             })
             .catch(err => console.log(err));
+
+        this.props.history.push("/login");
     }
 
     render() {
@@ -88,4 +96,4 @@ const loginFormStyle = {
     margin: '30px auto'
 }
 
-export default Signup;
+export default withRouter(Signup);

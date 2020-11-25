@@ -1,48 +1,33 @@
-import React, {Component} from 'react';
-import PropTypes from "prop-types";
+import React, {useState} from 'react';
 
-class SearchBar extends Component {
 
-    state = {
-        searchQuery: ''
-    }
+export default function SearchBar({performSearch}) {
+    const [query, setQuery] = useState('');
 
-    onChange = (e) => {
-        this.setState({searchQuery: e.target.value});
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = (event) => {
+        event.preventDefault();
 
         // Do nothing if search query is empty
-        if (this.state.searchQuery === '') return;
+        if (query === '') return;
 
-        this.props.performSearch(this.state.searchQuery);
+        performSearch(query);
 
-        this.setState({searchQuery: ''});
+        setQuery('')
     }
 
-    render() {
-        return (
-            <form className="form-inline px-auto row" onSubmit={this.onSubmit}>
-                <input
-                    className="form-control mr-sm-2 col-10"
-                    type="search"
-                    placeholder="Search"
-                    name="searchQuery"
-                    value={this.state.searchQuery}
-                    onChange={this.onChange}/>
-                <input
-                    className="btn btn-outline-success col-auto"
-                    type="submit"
-                    value="Search" />
-            </form>
-        )
-    }
+    return (
+        <form className="form-inline px-auto row" onSubmit={event => onSubmit(event)}>
+            <input
+                className="form-control mr-sm-2 col-10"
+                type="search"
+                placeholder="Search"
+                name="searchQuery"
+                value={query}
+                onChange={event => setQuery(event.target.value) }/>
+            <input
+                className="btn btn-outline-success col-auto"
+                type="submit"
+                value="Search" />
+        </form>
+    )
 }
-
-SearchBar.propTypes = {
-    performSearch: PropTypes.func.isRequired,
-};
-
-export default SearchBar;
