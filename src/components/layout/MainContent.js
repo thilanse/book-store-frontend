@@ -35,7 +35,7 @@ function Recommendations({books, loading, performPurchase}) {
     )
 }
 
-function MainContent({results}) {
+function MainContent() {
     let history = useHistory();
     let [books, setBooks] = useState([]);
     let [loading, setLoading] = useState(true);
